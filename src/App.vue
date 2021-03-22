@@ -2,6 +2,7 @@
   <div style=" font-size: 15px; width:800px; margin: 0 auto;">
     <img src="@/assets/cmccs.png" alt="" height="auto" width="300px" style="display: block; margin: 0 auto">
       <el-row :gutter="25" style="border: 1px dashed green; padding: 20px;">
+        <h2 class="title-form">CMC SOC ACTION</h2>
         <el-col :span="10">
           <label style="color:green; margin-bottom: 15px; display: block; font-family: 'Open Sans', sans-serif;">IP Address:</label>
           <el-input placeholder="VD: 172.24.240.117" v-model="ip"></el-input>
@@ -31,7 +32,9 @@
             <el-button  type="success" round @click="getData()" style="background-color: green; border-color:green">GET</el-button>    
         </el-col>
       </el-row>
-      <el-row :gutter="15"  class="jsonText">
+      <el-row :gutter="15"  class="result" v-if="isShow">
+        <!-- <label>Result:</label> -->
+        <h3>IP : {{ ip }} Action: {{ valueAddress }}</h3>
         <el-col>
           <pre style="word-wrap: break-word; white-space: pre-wrap;">{{ data }}
           </pre>
@@ -45,6 +48,7 @@ export default {
   name: "App",
   data() {
     return {
+      isShow: false,
       data: null,
       ip: "",
       option: "",
@@ -94,6 +98,7 @@ export default {
         .get(this.url)
         .then((response) => {
           this.data = response.data;
+          this.isShow=true;
         })
         .catch((e) => {
           this.errors.push(e);
@@ -108,6 +113,7 @@ export default {
 .jsonText{
   font-family: 'Marck Script', cursive;
   color: green;
+  font-size: 40px;
 }
 .app{
   background-color: #000;
@@ -132,5 +138,30 @@ export default {
 .el-select {
     display: block;
     position: relative;
+}
+.el-select-dropdown__item{
+  color:green;
+}
+.el-select-dropdown{
+background-color: rgba(0,0,0,0.9);
+border: 1px solid green;
+}
+.title-form{
+  font-size: 20px;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 0;
+}
+.result h3{
+  font-size: 16px;
+  font-weight: bold;
+  color: green;
+  font-family: 'Open Sans', sans-serif;
+  margin-top: 0;
+  text-align: left;
+  padding: 20px 0;
 }
 </style>
