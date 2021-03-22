@@ -29,13 +29,13 @@
         </el-col>
         <el-col :span="1">
           <br><br>
-            <el-button  type="success" round @click="getData()" style="background-color: green; border-color:green">GET</el-button>    
+            <el-button  type="success" round @click="getData()" style="background-color: green; border-color:green;">GET</el-button>    
         </el-col>
       </el-row>
       <el-row :gutter="15"  class="result" v-if="isShow">
         <!-- <label>Result:</label> -->
         <h3>IP : {{ ip }} Action: {{ valueAddress }}</h3>
-        <el-col>
+        <el-col class="jsonText">
           <pre style="word-wrap: break-word; white-space: pre-wrap;">{{ data }}
           </pre>
         </el-col>
@@ -93,6 +93,7 @@ export default {
         alert("Bạn nhập 1 địa chỉ IP không hợp lệ!")  
       }
     },
+
     fetchData() {
       axios
         .get(this.url)
@@ -111,9 +112,8 @@ export default {
 
 <style>
 .jsonText{
-  font-family: 'Marck Script', cursive;
   color: green;
-  font-size: 40px;
+  font-size: 18px;
 }
 .app{
   background-color: #000;
@@ -141,6 +141,7 @@ export default {
 }
 .el-select-dropdown__item{
   color:green;
+  font-family: 'Open Sans', sans-serif;
 }
 .el-select-dropdown{
 background-color: rgba(0,0,0,0.9);
@@ -163,5 +164,17 @@ border: 1px solid green;
   margin-top: 0;
   text-align: left;
   padding: 20px 0;
+}
+.el-select-dropdown__item.selected {
+  color: green;
+}
+.el-select .el-input.is-focus .el-input__inner {
+    border-color: green;
+}
+.el-input__inner:focus {
+    border-color: green;
+}
+.el-select .el-input__inner:focus {
+    border-color: green;
 }
 </style>
